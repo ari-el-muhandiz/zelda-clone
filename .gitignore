@@ -1,0 +1,48 @@
+# Build directories
+/build/
+/bin/
+/obj/
+/out/
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Compiled binaries
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+*.a
+*.o
+*.obj
+
+# Logs and user temp files
+*.log
+
+# macOS-specific
+.DS_Store
+
+# IDE specific (optional, depending on what you use)
+
+# VS Code
+.vscode/
+
+# CLion / Rider
+.idea/
+cmake-build-*/
+
+# QT Creator
+*.pro.user*
+
+# Backup files
+*~
+*.swp
+*.bak
+*.tmp
+
+.cache
