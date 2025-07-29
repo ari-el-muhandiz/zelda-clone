@@ -37,9 +37,9 @@ int main(int argc, char* argv[]) {
 
     int heroX = SCREEN_WIDTH / 2 - 16;
     int heroY = SCREEN_HEIGHT / 2 - 16;
-    const int heroSpeed = 4;
 
     while (running) {
+        constexpr int heroSpeed = 4;
         inputManager.update();
 
         if (inputManager.isKeyDown(SDL_SCANCODE_ESCAPE) || inputManager.isQuit()) {
@@ -47,18 +47,8 @@ int main(int argc, char* argv[]) {
         }
 
         // Handle hero movement
-        if (inputManager.isKeyDown(SDL_SCANCODE_UP)) {
-            heroY -= heroSpeed;
-        }
-        if (inputManager.isKeyDown(SDL_SCANCODE_DOWN)) {
-            heroY += heroSpeed;
-        }
-        if (inputManager.isKeyDown(SDL_SCANCODE_LEFT)) {
-            heroX -= heroSpeed;
-        }
-        if (inputManager.isKeyDown(SDL_SCANCODE_RIGHT)) {
-            heroX += heroSpeed;
-        }
+        heroX += inputManager.getMoveX() * heroSpeed;
+        heroY += inputManager.getMoveY() * heroSpeed;
 
         SDL_SetRenderDrawColor(renderer, 30, 30, 60, 255);
         SDL_RenderClear(renderer);

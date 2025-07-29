@@ -22,3 +22,17 @@ bool InputManager::isQuit() const {
 bool InputManager::isKeyDown(const SDL_Scancode key) const {
     return keyboardState && keyboardState[key];
 }
+
+int InputManager::getMoveX() const {
+    int moveX = 0;
+    if (isKeyDown(SDL_SCANCODE_LEFT)) { moveX = -1; }
+    if (isKeyDown(SDL_SCANCODE_RIGHT)) { moveX += 1; }
+    return moveX;
+}
+
+int InputManager::getMoveY() const {
+    int moveY = 0;
+    if (isKeyDown(SDL_SCANCODE_UP)) { moveY = -1; }
+    if (isKeyDown(SDL_SCANCODE_DOWN)) { moveY += 1; }
+    return moveY;
+}
