@@ -1,7 +1,7 @@
 
 #include <SDL.h>
 #include <iostream>
-#include "engine/input/InputManager.h"
+#include "InputManager.h"
 
 constexpr int SCREEN_WIDTH = 640;
 constexpr int SCREEN_HEIGHT = 480;
