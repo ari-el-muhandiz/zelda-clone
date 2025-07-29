@@ -1,0 +1,7 @@
+{
+  "name": "zelda-clone",
+  "version": "1.0.0",
+  "dependencies": [
+    "sdl2"
+  ]
+}

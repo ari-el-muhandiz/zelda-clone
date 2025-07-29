@@ -1,1 +1,1 @@
-This is Zelda clone game built using MonoGame
+This is Zelda clone game built using SDL 2.0 and C++.
