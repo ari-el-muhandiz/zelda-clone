@@ -1,6 +1,7 @@
 
 #include <SDL.h>
 #include <iostream>
+#include "engine/input/InputManager.h"
 
 constexpr int SCREEN_WIDTH = 640;
 constexpr int SCREEN_HEIGHT = 480;
@@ -30,21 +31,40 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    InputManager inputManager;
     bool running = true;
     SDL_Event event;
 
+    int heroX = SCREEN_WIDTH / 2 - 16;
+    int heroY = SCREEN_HEIGHT / 2 - 16;
+    const int heroSpeed = 4;
+
     while (running) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                running = false;
-            }
+        inputManager.update();
+
+        if (inputManager.isKeyDown(SDL_SCANCODE_ESCAPE) || inputManager.isQuit()) {
+            running = false;
+        }
+
+        // Handle hero movement
+        if (inputManager.isKeyDown(SDL_SCANCODE_UP)) {
+            heroY -= heroSpeed;
+        }
+        if (inputManager.isKeyDown(SDL_SCANCODE_DOWN)) {
+            heroY += heroSpeed;
+        }
+        if (inputManager.isKeyDown(SDL_SCANCODE_LEFT)) {
+            heroX -= heroSpeed;
+        }
+        if (inputManager.isKeyDown(SDL_SCANCODE_RIGHT)) {
+            heroX += heroSpeed;
         }
 
         SDL_SetRenderDrawColor(renderer, 30, 30, 60, 255);
         SDL_RenderClear(renderer);
 
         // Render a placeholder "hero"
-        SDL_Rect hero = { SCREEN_WIDTH / 2 - 16, SCREEN_HEIGHT / 2 - 16, 32, 32 };
+        SDL_Rect hero = { heroX, heroY, 32, 32 };
         SDL_SetRenderDrawColor(renderer, 200, 50, 50, 255);
         SDL_RenderFillRect(renderer, &hero);
 

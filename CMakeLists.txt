@@ -9,7 +9,9 @@ find_package(SDL2 CONFIG REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
 
-add_executable(ZeldaClone src/main.cpp)
+add_executable(ZeldaClone src/main.cpp
+        src/engine/input/InputManager.h
+        src/engine/input/InputManager.cpp)
 target_link_libraries(ZeldaClone 
     PRIVATE 
     SDL2::SDL2 
