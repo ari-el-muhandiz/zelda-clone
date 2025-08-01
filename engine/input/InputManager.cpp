@@ -23,16 +23,16 @@ bool InputManager::isKeyDown(const SDL_Scancode key) const {
     return keyboardState && keyboardState[key];
 }
 
-int InputManager::getMoveX() const {
-    int moveX = 0;
-    if (isKeyDown(SDL_SCANCODE_LEFT)) { moveX = -1; }
-    if (isKeyDown(SDL_SCANCODE_RIGHT)) { moveX += 1; }
+float InputManager::getMoveX() const {
+    int moveX = 0.0f;
+    if (isKeyDown(SDL_SCANCODE_LEFT)) { moveX = -1.0f; }
+    if (isKeyDown(SDL_SCANCODE_RIGHT)) { moveX += 1.0f; }
     return moveX;
 }
 
-int InputManager::getMoveY() const {
-    int moveY = 0;
-    if (isKeyDown(SDL_SCANCODE_UP)) { moveY = -1; }
-    if (isKeyDown(SDL_SCANCODE_DOWN)) { moveY += 1; }
+float InputManager::getMoveY() const {
+    int moveY = 0.0f;
+    if (isKeyDown(SDL_SCANCODE_UP)) { moveY += 1.0f; }
+    if (isKeyDown(SDL_SCANCODE_DOWN)) { moveY -= 1.0f; }
     return moveY;
 }
