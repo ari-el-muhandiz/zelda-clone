@@ -1,4 +1,6 @@
 #include "OpenGLRenderer.h"
+#include "OpenGLContext.h"
+#include <SDL.h>
 
 // OpenGL constants
 constexpr int GL_VERTEX_SHADER = 0x8B31;
@@ -24,6 +26,13 @@ namespace Engine
 
         void OpenGLRenderer::clear(float r, float g, float b, float a)
         {
+            // Ensure context is current
+            OpenGLContext* glContext = dynamic_cast<OpenGLContext*>(context);
+            if (glContext)
+            {
+                glContext->makeCurrent();
+            }
+            
             context->clearColor(r, g, b, a);
             context->clear(GL_COLOR_BUFFER_BIT);
         }
@@ -171,7 +180,15 @@ namespace Engine
 
         void OpenGLRenderer::beginFrame()
         {
-            // Nothing specific needed for OpenGL
+            // Make the OpenGL context current before rendering
+            if (context)
+            {
+                OpenGLContext* glContext = dynamic_cast<OpenGLContext*>(context);
+                if (glContext)
+                {
+                    glContext->makeCurrent();
+                }
+            }
         }
 
         void OpenGLRenderer::endFrame()

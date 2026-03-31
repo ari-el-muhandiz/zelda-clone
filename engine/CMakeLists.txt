@@ -1,7 +1,11 @@
 # engine/CMakeLists.txt
 
 add_library(engine 
+    core/Clock.cpp
     input/InputManager.cpp
+    window/SDLWindow.cpp
+    game/GameObject.cpp
+    game/Game.cpp
     graphics/Mesh.cpp
     graphics/Shader.cpp
     graphics/Material.cpp

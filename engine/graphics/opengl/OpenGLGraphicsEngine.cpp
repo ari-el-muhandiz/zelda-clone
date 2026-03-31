@@ -21,6 +21,9 @@ namespace Engine
                 return nullptr;
             }
 
+            // Make context current before GLAD initialization
+            SDL_GL_MakeCurrent(window, glContext);
+
             // Enable VSync
             SDL_GL_SetSwapInterval(1);
 
@@ -32,7 +35,14 @@ namespace Engine
                 return nullptr;
             }
 
-            return std::make_unique<OpenGLContext>(glContext);
+            auto context = std::make_unique<OpenGLContext>(glContext, window);
+            
+            // Set initial viewport
+            int w, h;
+            SDL_GetWindowSize(window, &w, &h);
+            context->setViewport(0, 0, w, h);
+
+            return context;
         }
 
     } // namespace OpenGL

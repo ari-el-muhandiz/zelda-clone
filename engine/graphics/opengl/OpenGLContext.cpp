@@ -6,7 +6,10 @@ namespace Engine
     namespace OpenGL
     {
 
-        OpenGLContext::OpenGLContext(SDL_GLContext context) : glContext(context) {}
+        OpenGLContext::OpenGLContext(SDL_GLContext context, SDL_Window* win)
+            : glContext(context), window(win)
+        {
+        }
 
         OpenGLContext::~OpenGLContext()
         {
@@ -131,7 +134,21 @@ namespace Engine
 
         void OpenGLContext::swapBuffers()
         {
+            glFinish();
             SDL_GL_SwapWindow(SDL_GL_GetCurrentWindow());
+        }
+
+        void OpenGLContext::makeCurrent()
+        {
+            if (window && glContext)
+            {
+                SDL_GL_MakeCurrent(window, glContext);
+            }
+        }
+
+        void OpenGLContext::setViewport(int x, int y, int width, int height)
+        {
+            glViewport(x, y, width, height);
         }
 
     } // namespace OpenGL

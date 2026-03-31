@@ -5,13 +5,8 @@
 #include "InputManager.h"
 
 void InputManager::update() {
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
-            quit = true;
-        }
-    }
-
+    // Note: SDL events are handled by Window::update()
+    // InputManager only queries keyboard state, it doesn't consume events
     keyboardState = SDL_GetKeyboardState(nullptr);
 }
 

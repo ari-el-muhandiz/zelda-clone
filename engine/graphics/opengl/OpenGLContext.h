@@ -12,9 +12,10 @@ namespace Engine
         {
         private:
             SDL_GLContext glContext = nullptr;
+            SDL_Window* window = nullptr;
 
         public:
-            OpenGLContext(SDL_GLContext context);
+            OpenGLContext(SDL_GLContext context, SDL_Window* win);
             ~OpenGLContext() override;
 
             // Shader operations
@@ -54,6 +55,10 @@ namespace Engine
 
             // Swap
             void swapBuffers() override;
+
+            // Context management
+            void makeCurrent();
+            void setViewport(int x, int y, int width, int height);
         };
 
     } // namespace OpenGL
