@@ -15,6 +15,7 @@ find_package(OpenGL REQUIRED)
 
 add_subdirectory(engine)
 add_executable(ZeldaClone src/main.cpp)
+
 target_link_libraries(ZeldaClone
         PRIVATE
         ${SDL2_LIBRARIES}
