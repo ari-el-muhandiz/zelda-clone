@@ -4,7 +4,6 @@
 #include "Mesh.h"
 #include "Material.h"
 #include "Shader.h"
-#include <memory>
 
 namespace Engine
 {

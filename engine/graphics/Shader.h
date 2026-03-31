@@ -2,6 +2,7 @@
 
 #include <string>
 #include <cstdint>
+#include <memory>
 
 namespace Engine
 {
@@ -28,7 +29,7 @@ namespace Engine
         void setCompiled(bool state) { compiled = state; }
 
         // Helper to load from files
-        static Shader *loadFromFiles(const std::string &vertexPath, const std::string &fragmentPath);
+        static std::unique_ptr<Shader> loadFromFiles(const std::string &vertexPath, const std::string &fragmentPath);
     };
 
 } // namespace Engine

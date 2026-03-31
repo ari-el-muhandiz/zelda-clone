@@ -16,7 +16,7 @@ namespace Engine
         // Resources are managed by renderer
     }
 
-    Shader *Shader::loadFromFiles(const std::string &vertexPath, const std::string &fragmentPath)
+    std::unique_ptr<Shader> Shader::loadFromFiles(const std::string &vertexPath, const std::string &fragmentPath)
     {
         // Load vertex shader
         std::ifstream vertexFile(vertexPath);
@@ -40,7 +40,7 @@ namespace Engine
         fragmentBuffer << fragmentFile.rdbuf();
         std::string fragmentSource = fragmentBuffer.str();
 
-        return new Shader(vertexSource, fragmentSource);
+        return std::make_unique<Shader>(vertexSource, fragmentSource);
     }
 
 } // namespace Engine

@@ -3,9 +3,6 @@
 #include <iostream>
 #include <memory>
 #include "input/InputManager.h"
-#include "graphics/GraphicsEngine.h"
-#include "graphics/GraphicsContext.h"
-#include "graphics/Renderer.h"
 #include "graphics/Mesh.h"
 #include "graphics/Shader.h"
 #include "graphics/Material.h"
@@ -55,7 +52,7 @@ int main(int argc, char *argv[])
     auto renderer = std::make_unique<Engine::OpenGL::OpenGLRenderer>(graphicsContext.get());
 
     // Load and compile shader
-    Engine::Shader *shader = Engine::Shader::loadFromFiles(
+    auto shader = Engine::Shader::loadFromFiles(
         "engine/shaders/vertex.glsl",
         "engine/shaders/fragment.glsl");
     if (!shader)
@@ -65,7 +62,7 @@ int main(int argc, char *argv[])
     }
 
     // Create material with the shader
-    auto material = std::make_unique<Engine::Material>(shader);
+    auto material = std::make_unique<Engine::Material>(shader.get());
     material->setFloat("scale", 0.2f);
 
     // Create triangle mesh
@@ -107,8 +104,7 @@ int main(int argc, char *argv[])
 
     // Cleanup
     renderer->deleteMesh(triangleMesh.get());
-    renderer->deleteShader(shader);
-    delete shader;
+    renderer->deleteShader(shader.get());
     SDL_DestroyWindow(window);
     SDL_Quit();
     return 0;

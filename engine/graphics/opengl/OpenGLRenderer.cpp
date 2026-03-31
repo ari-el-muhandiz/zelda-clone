@@ -1,5 +1,4 @@
 #include "OpenGLRenderer.h"
-#include <iostream>
 
 // OpenGL constants
 constexpr int GL_VERTEX_SHADER = 0x8B31;

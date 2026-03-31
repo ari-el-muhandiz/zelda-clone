@@ -1,6 +1,5 @@
 #include "OpenGLContext.h"
 #include <glad/glad.h>
-#include <iostream>
 
 namespace Engine
 {
