@@ -40,6 +40,7 @@ namespace Engine
         virtual int32_t getUniformLocation(uint32_t program, const char *name) = 0;
         virtual void uniform2f(int32_t location, float x, float y) = 0;
         virtual void uniform1f(int32_t location, float value) = 0;
+        virtual void uniform1i(int32_t location, int value) = 0;
 
         // Rendering
         virtual void clearColor(float r, float g, float b, float a) = 0;
@@ -48,6 +49,19 @@ namespace Engine
 
         // Swap
         virtual void swapBuffers() = 0;
+
+        // Texture operations
+        virtual void genTextures(int n, uint32_t *textures) = 0;
+        virtual void deleteTextures(int n, const uint32_t *textures) = 0;
+        virtual void bindTexture(uint32_t target, uint32_t texture) = 0;
+        virtual void activeTexture(uint32_t texture) = 0;
+        virtual void texImage2D(uint32_t target, int level, int internalFormat, int width, int height, int border, uint32_t format, uint32_t type, const void *data) = 0;
+        virtual void texParameteri(uint32_t target, uint32_t pname, int param) = 0;
+
+        // Blending
+        virtual void enable(uint32_t cap) = 0;
+        virtual void disable(uint32_t cap) = 0;
+        virtual void blendFunc(uint32_t sfactor, uint32_t dfactor) = 0;
     };
 
 } // namespace Engine

@@ -47,6 +47,7 @@ namespace Engine
             int32_t getUniformLocation(uint32_t program, const char *name) override;
             void uniform2f(int32_t location, float x, float y) override;
             void uniform1f(int32_t location, float value) override;
+            void uniform1i(int32_t location, int value) override;
 
             // Rendering
             void clearColor(float r, float g, float b, float a) override;
@@ -59,6 +60,20 @@ namespace Engine
             // Context management
             void makeCurrent();
             void setViewport(int x, int y, int width, int height);
+
+            // Texture operations
+            void genTextures(int n, uint32_t *textures) override;
+            void deleteTextures(int n, const uint32_t *textures) override;
+            void bindTexture(uint32_t target, uint32_t texture) override;
+            void activeTexture(uint32_t texture) override;
+            void texImage2D(uint32_t target, int level, int internalFormat, int width, int height, int border, uint32_t format, uint32_t type, const void *data) override;
+            void texParameteri(uint32_t target, uint32_t pname, int param) override;
+
+            // Blending
+            void enable(uint32_t cap) override;
+            void disable(uint32_t cap) override;
+            void blendFunc(uint32_t sfactor, uint32_t dfactor) override;
+
         };
 
     } // namespace OpenGL

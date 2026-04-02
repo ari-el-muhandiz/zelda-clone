@@ -117,6 +117,11 @@ namespace Engine
             glUniform1f(location, value);
         }
 
+        void OpenGLContext::uniform1i(int32_t location, int value)
+        {
+            glUniform1i(location, value);
+        }
+
         void OpenGLContext::clearColor(float r, float g, float b, float a)
         {
             glClearColor(r, g, b, a);
@@ -149,6 +154,51 @@ namespace Engine
         void OpenGLContext::setViewport(int x, int y, int width, int height)
         {
             glViewport(x, y, width, height);
+        }
+
+        void OpenGLContext::genTextures(int n, uint32_t *textures)
+        {
+            glGenTextures(n, textures);
+        }
+
+        void OpenGLContext::deleteTextures(int n, const uint32_t *textures)
+        {
+            glDeleteTextures(n, textures);
+        }
+
+        void OpenGLContext::bindTexture(uint32_t target, uint32_t texture)
+        {
+            glBindTexture(target, texture);
+        }
+
+        void OpenGLContext::activeTexture(uint32_t texture)
+        {
+            glActiveTexture(texture);
+        }
+
+        void OpenGLContext::texImage2D(uint32_t target, int level, int internalFormat, int width, int height, int border, uint32_t format, uint32_t type, const void *data)
+        {
+            glTexImage2D(target, level, internalFormat, width, height, border, format, type, data);
+        }
+
+        void OpenGLContext::texParameteri(uint32_t target, uint32_t pname, int param)
+        {
+            glTexParameteri(target, pname, param);
+        }
+
+        void OpenGLContext::enable(uint32_t cap)
+        {
+            glEnable(cap);
+        }
+
+        void OpenGLContext::disable(uint32_t cap)
+        {
+            glDisable(cap);
+        }
+
+        void OpenGLContext::blendFunc(uint32_t sfactor, uint32_t dfactor)
+        {
+            glBlendFunc(sfactor, dfactor);
         }
 
     } // namespace OpenGL
