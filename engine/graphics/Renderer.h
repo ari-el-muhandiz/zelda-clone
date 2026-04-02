@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "Material.h"
 #include "Shader.h"
+#include "Texture.h"
 
 namespace Engine
 {
@@ -32,6 +33,10 @@ namespace Engine
         // Frame operations
         virtual void beginFrame() = 0;
         virtual void endFrame() = 0;
+
+        // Texture management
+        virtual void uploadTexture(Texture *texture) = 0;
+        virtual void deleteTexture(Texture *texture) = 0;
 
         GraphicsContext *getContext() { return context; }
     };

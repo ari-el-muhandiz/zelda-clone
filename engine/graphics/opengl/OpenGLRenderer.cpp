@@ -10,6 +10,19 @@ constexpr int GL_COLOR_BUFFER_BIT = 0x00004000;
 constexpr int GL_ARRAY_BUFFER = 0x8892;
 constexpr int GL_ELEMENT_ARRAY_BUFFER = 0x8893;
 constexpr int GL_STATIC_DRAW = 0x88E4;
+constexpr int GL_TEXTURE_2D = 0x0DE1;
+constexpr int GL_TEXTURE_WRAP_S = 0x2802;
+constexpr int GL_TEXTURE_WRAP_T = 0x2803;
+constexpr int GL_TEXTURE_MIN_FILTER = 0x2801;
+constexpr int GL_TEXTURE_MAG_FILTER = 0x2800;
+constexpr int GL_CLAMP_TO_EDGE = 0x812F;
+constexpr int GL_NEAREST = 0x2600;
+constexpr int GL_RGBA = 0x1908;
+constexpr int GL_UNSIGNED_BYTE = 0x1401;
+constexpr int GL_ONE_MINUS_SRC_ALPHA = 0x0303;
+constexpr int GL_SRC_ALPHA = 0x0302;
+constexpr int GL_BLEND = 0x0BE2;
+constexpr int GL_TEXTURE0 = 0x84C0;
 
 namespace Engine
 {
@@ -194,6 +207,37 @@ namespace Engine
         void OpenGLRenderer::endFrame()
         {
             context->swapBuffers();
+        }
+
+        void OpenGLRenderer::uploadTexture(Texture *texture)
+        {            // Texture uploading logic
+            if (texture->isUploaded())
+            {
+                return;
+            }
+
+            uint32_t handle;
+            context->genTextures(1, &handle);
+            context->bindTexture(GL_TEXTURE_2D, handle);
+            context->texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            context->texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            context->texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            context->texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            context->texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture->getWidth(), texture->getHeight(), 0,
+                                  GL_RGBA, GL_UNSIGNED_BYTE, texture->getPixelData());
+            texture->setHandle(handle);
+            texture->setUploaded(true);
+        }
+
+        void OpenGLRenderer::deleteTexture(Texture *texture)
+        {            // Texture deletion logic
+            if (texture->isUploaded())
+            {
+                uint32_t handle = texture->getHandle();
+                context->deleteTextures(1, &handle);
+                texture->setHandle(0);
+                texture->setUploaded(false);
+            }
         }
 
     } // namespace OpenGL

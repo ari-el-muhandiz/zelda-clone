@@ -28,6 +28,10 @@ namespace Engine
             // Frame operations
             void beginFrame() override;
             void endFrame() override;
+
+            // Texture management
+            void uploadTexture(Texture *texture) override;
+            void deleteTexture(Texture *texture) override;
         };
 
     } // namespace OpenGL
