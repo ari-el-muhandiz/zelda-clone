@@ -19,6 +19,7 @@ constexpr int GL_CLAMP_TO_EDGE = 0x812F;
 constexpr int GL_NEAREST = 0x2600;
 constexpr int GL_RGBA = 0x1908;
 constexpr int GL_UNSIGNED_BYTE = 0x1401;
+constexpr int GL_UNSIGNED_INT = 0x1405;
 constexpr int GL_ONE_MINUS_SRC_ALPHA = 0x0303;
 constexpr int GL_SRC_ALPHA = 0x0302;
 constexpr int GL_BLEND = 0x0BE2;
@@ -186,9 +187,48 @@ namespace Engine
                 }
             }
 
+            for (const auto &[name, value] : material->getIntUniforms())
+            {
+                if (name == "spriteTexture")
+                {
+                    continue; // Skip texture uniform, handled separately
+                }
+
+                int32_t location = context->getUniformLocation(shader->getProgram(), name.c_str());
+                if (location >= 0)
+                {
+                    context->uniform1i(location, value);
+                }
+            }
+
+            context->activeTexture(GL_TEXTURE0);
+            if (material->getTexture() != nullptr)
+            {
+                if (!material->getTexture()->isUploaded())
+                {
+                    uploadTexture(material->getTexture());
+                }   
+                context->bindTexture(GL_TEXTURE_2D, material->getTexture()->getHandle());
+                int32_t location = context->getUniformLocation(shader->getProgram(), "spriteTexture");
+                if (location >= 0)
+                {
+                    context->uniform1i(location, 0); // Texture unit 0
+                }
+            } else {
+                context->bindTexture(GL_TEXTURE_2D, 0);
+            }
+
             // Draw mesh
             context->bindVertexArray(mesh->getVAO());
-            context->drawArrays(GL_TRIANGLES, 0, mesh->getVertexCount());
+
+            if (mesh->hasIndices())
+            {
+                context->drawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, nullptr);
+            }
+            else
+            {
+                context->drawArrays(GL_TRIANGLES, 0, mesh->getVertexCount());
+            }
         }
 
         void OpenGLRenderer::beginFrame()
@@ -200,6 +240,8 @@ namespace Engine
                 if (glContext)
                 {
                     glContext->makeCurrent();
+                    context->enable(GL_BLEND);
+                    context->blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 }
             }
         }

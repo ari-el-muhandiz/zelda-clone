@@ -22,4 +22,9 @@ namespace Engine
         vec2Uniforms[name] = {x, y};
     }
 
+    void Material::setInt(const std::string &name, int value)
+    {
+        intUniforms[name] = value;
+    }
+
 } // namespace Engine

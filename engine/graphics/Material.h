@@ -15,6 +15,7 @@ namespace Engine
         std::unordered_map<std::string, float> floatUniforms;
         std::unordered_map<std::string, std::pair<float, float>> vec2Uniforms;
         Texture *texture = nullptr;
+        std::unordered_map<std::string, int> intUniforms;
 
     public:
         Material(Shader *shaderPtr);
@@ -25,10 +26,12 @@ namespace Engine
         // Set uniform values
         void setFloat(const std::string &name, float value);
         void setVec2(const std::string &name, float x, float y);
+        void setInt(const std::string &name, int value);
 
         // Get uniform values
         const std::unordered_map<std::string, float> &getFloatUniforms() const { return floatUniforms; }
         const std::unordered_map<std::string, std::pair<float, float>> &getVec2Uniforms() const { return vec2Uniforms; }
+        const std::unordered_map<std::string, int> &getIntUniforms() const { return intUniforms; }
 
         // Texture management
         void setTexture(Texture *tex) { texture = tex; }

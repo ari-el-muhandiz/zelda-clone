@@ -46,6 +46,7 @@ namespace Engine
         virtual void clearColor(float r, float g, float b, float a) = 0;
         virtual void clear(uint32_t mask) = 0;
         virtual void drawArrays(uint32_t mode, int first, int count) = 0;
+        virtual void drawElements(uint32_t mode, int count, uint32_t type, const void *indices) = 0;
 
         // Swap
         virtual void swapBuffers() = 0;

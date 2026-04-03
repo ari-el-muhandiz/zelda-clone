@@ -53,6 +53,7 @@ namespace Engine
             void clearColor(float r, float g, float b, float a) override;
             void clear(uint32_t mask) override;
             void drawArrays(uint32_t mode, int first, int count) override;
+            void drawElements(uint32_t mode, int count, uint32_t type, const void *indices) override;
 
             // Swap
             void swapBuffers() override;

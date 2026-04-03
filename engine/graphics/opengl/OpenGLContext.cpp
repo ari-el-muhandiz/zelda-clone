@@ -137,6 +137,11 @@ namespace Engine
             glDrawArrays(mode, first, count);
         }
 
+        void OpenGLContext::drawElements(uint32_t mode, int count, uint32_t type, const void *indices)
+        {
+            glDrawElements(mode, count, type, indices);
+        }
+
         void OpenGLContext::swapBuffers()
         {
             glFinish();
