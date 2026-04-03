@@ -41,6 +41,7 @@ TIMEFRAME
 •	Render a triangle to the screen (hello world)
 •	Build a render abstraction layer (e.g., Renderer::DrawMesh(mesh, material))
 •	Load and render 2D sprites or textured quads
+•	Support sprite sheets with UV offset/scale for animation frames
 
 ⸻
 
@@ -93,3 +94,29 @@ TIMEFRAME
 •	🍎 macOS (Metal layer via MoltenVK or SDL)
 •	🎮 Switch, PS5, Xbox (via dev SDKs)
 •	Build export system that bundles engine + game assets
+
+⸻
+
+## 🎨 Features
+
+### Sprite Sheet Support
+
+The engine supports sprite sheets (texture atlases) with UV offset and scale for selecting individual frames:
+
+**Shader Support:**
+- `uvOffset`: starting UV coordinate for the sprite frame
+- `uvScale`: size of one frame in UV space (e.g., 1/16 for a 16-column sheet)
+
+**Usage Example:**
+```cpp
+// For a 16x9 sprite sheet, select sprite at column 5, row 2
+float u0 = 5.0f / 16.0f;
+float v0 = 2.0f / 9.0f;
+material->setVec2("uvOffset", u0, v0);
+material->setVec2("uvScale", 1.0f / 16.0f, 1.0f / 9.0f);
+```
+
+**Benefits:**
+- Single texture for all character animations
+- Easy frame switching for sprite animation
+- Memory efficient compared to separate textures per frame
