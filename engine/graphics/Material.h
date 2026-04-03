@@ -3,6 +3,7 @@
 #include "Shader.h"
 #include <unordered_map>
 #include <string>
+#include "Texture.h"
 
 namespace Engine
 {
@@ -13,6 +14,7 @@ namespace Engine
         Shader *shader;
         std::unordered_map<std::string, float> floatUniforms;
         std::unordered_map<std::string, std::pair<float, float>> vec2Uniforms;
+        Texture *texture = nullptr;
 
     public:
         Material(Shader *shaderPtr);
@@ -27,6 +29,10 @@ namespace Engine
         // Get uniform values
         const std::unordered_map<std::string, float> &getFloatUniforms() const { return floatUniforms; }
         const std::unordered_map<std::string, std::pair<float, float>> &getVec2Uniforms() const { return vec2Uniforms; }
+
+        // Texture management
+        void setTexture(Texture *tex) { texture = tex; }
+        Texture *getTexture() const { return texture; }
     };
 
 } // namespace Engine

@@ -36,6 +36,8 @@ namespace Engine
         {
             constexpr const char* SHADER_VERTEX = "engine/shaders/vertex.glsl";
             constexpr const char* SHADER_FRAGMENT = "engine/shaders/fragment.glsl";
+            constexpr const char* SPRITE_SHADER_VERTEX = "engine/shaders/sprite_vertex.glsl";
+            constexpr const char* SPRITE_SHADER_FRAGMENT = "engine/shaders/sprite_fragment.glsl";
         }
     }
 

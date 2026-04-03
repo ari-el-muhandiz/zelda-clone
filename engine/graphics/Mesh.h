@@ -58,6 +58,8 @@ namespace Engine
 
         // Helper function to create simple 2D mesh
         static Mesh *createSimple2D(const std::vector<float> &positions);
+        static Mesh *createQuad2D();
+        
     };
 
 } // namespace Engine

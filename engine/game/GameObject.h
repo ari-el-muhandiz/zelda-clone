@@ -4,7 +4,6 @@
 #include "../graphics/Mesh.h"
 #include "../graphics/Material.h"
 #include "../graphics/Renderer.h"
-#include <memory>
 
 namespace Engine
 {

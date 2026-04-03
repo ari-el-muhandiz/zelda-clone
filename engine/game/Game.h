@@ -2,9 +2,7 @@
 
 #include "GameObject.h"
 #include "../input/InputManager.h"
-#include "../graphics/opengl/OpenGLRenderer.h"
 #include "../window/Window.h"
-#include "../core/Clock.h"
 #include <memory>
 #include <vector>
 

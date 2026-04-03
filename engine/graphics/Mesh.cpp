@@ -54,4 +54,38 @@ namespace Engine
         return new Mesh(positions, {posAttr});
     }
 
+    Mesh *Mesh::createQuad2D()
+    {
+        // Create a simple quad (two triangles) for 2D rendering
+        std::vector<float> quadVertices = {
+            -0.5f, -0.5f, 0.0f, 0.0f, // Bottom-left
+             0.5f, -0.5f, 1.0f, 0.0f, // Bottom-right
+             0.5f,  0.5f, 1.0f, 1.0f, // Top-right
+            -0.5f,  0.5f, 0.0f, 1.0f  // Top-left
+        };
+
+        std::vector<uint32_t> quadIndices = {
+            0, 1, 2, // First triangle
+            2, 3, 0  // Second triangle
+        };
+
+        VertexAttribute posAttr;
+        posAttr.location = 0;
+        posAttr.componentCount = 2;
+        posAttr.type = 0x1406; // GL_FLOAT
+        posAttr.normalized = false;
+        posAttr.stride = 4 * sizeof(float);
+        posAttr.offset = 0; // Position starts at the beginning
+
+        VertexAttribute texAttr;
+        texAttr.location = 1;
+        texAttr.componentCount = 2;
+        texAttr.type = 0x1406; // GL_FLOAT
+        texAttr.normalized = false;
+        texAttr.stride = 4 * sizeof(float);
+        texAttr.offset = 2 * sizeof(float); // Texture coordinates start after position
+
+        return new Mesh(quadVertices, quadIndices, {posAttr, texAttr});
+    }
+
 } // namespace Engine
