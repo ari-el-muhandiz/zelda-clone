@@ -24,4 +24,5 @@ target_link_libraries(engine
     glad::glad
     ${SDL2_LIBRARIES}
     OpenGL::GL
+    EnTT::EnTT
 )

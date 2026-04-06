@@ -12,6 +12,7 @@ find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 find_package(glad CONFIG REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(EnTT CONFIG REQUIRED)
 
 add_subdirectory(engine)
 add_executable(ZeldaClone src/main.cpp)
