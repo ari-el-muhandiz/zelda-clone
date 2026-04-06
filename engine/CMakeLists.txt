@@ -14,6 +14,7 @@ add_library(engine
     graphics/opengl/OpenGLGraphicsEngine.cpp
     graphics/opengl/OpenGLRenderer.cpp
     graphics/Texture.cpp
+    graphics/SpriteSheet.cpp
 )
 
 target_include_directories(engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
@@ -22,4 +23,5 @@ target_link_libraries(engine
     PRIVATE
     glad::glad
     ${SDL2_LIBRARIES}
+    OpenGL::GL
 )

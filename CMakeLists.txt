@@ -18,8 +18,5 @@ add_executable(ZeldaClone src/main.cpp)
 
 target_link_libraries(ZeldaClone
         PRIVATE
-        ${SDL2_LIBRARIES}
-        glad::glad
         engine
-        OpenGL::GL
 )

@@ -8,6 +8,7 @@
 #include "graphics/Mesh.h"
 #include "graphics/Shader.h"
 #include "graphics/Material.h"
+#include "graphics/SpriteSheet.h"
 #include "graphics/opengl/OpenGLGraphicsEngine.h"
 #include "graphics/opengl/OpenGLRenderer.h"
 #include "game/Game.h"
@@ -55,10 +56,17 @@ int main(int argc, char *argv[])
         std::cerr << "Failed to load texture\n";
         return 1;
     }
+
+    auto spriteSheet = std::make_unique<Engine::SpriteSheet>(texture.get(), 16, 9, 16, 16);
     auto material = std::make_unique<Engine::Material>(shader.get());
     material->setFloat("scale", Engine::Config::Game::HERO_SCALE);
     material->setTexture(texture.get());
-    
+    if (!spriteSheet->applyFrame(0, 0, material.get()))
+    {
+        std::cerr << "Failed to apply sprite sheet frame (0,0), falling back to full texture UVs\n";
+        material->setVec2("uvOffset", 0.0f, 0.0f);
+        material->setVec2("uvScale", 1.0f, 1.0f);
+    }
 
     auto quadMesh = std::unique_ptr<Engine::Mesh>(
         Engine::Mesh::createQuad2D());
