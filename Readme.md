@@ -8,13 +8,15 @@ This is Zelda clone game built using SDL 2.0 and C++.
 •	Implement basic camera and transforms
 
 ✅ Phase 2: Tools and Assets
-•	Implement asset loader (PNG, OBJ, glTF, etc.)
+•	Implement asset loader (PNG, OBJ, glTF, WAV, OGG, etc.)
+•	Add basic audio runtime (SFX + music) using OpenAL Soft
 •	Add 3D rendering (mesh, material, light)
 •	Create minimal editor/debug UI
 •	Add scripting with Lua
 
 ✅ Phase 3: Gameplay Systems
 •	Add animation system (skeletal & sprite)
+•	Add gameplay-triggered sound effects and background music
 •	Add physics engine integration
 •	Build example game level (Zelda-style)
 •	Save/load support, input config
@@ -56,9 +58,11 @@ TIMEFRAME
 
 ✅ Week 15–20: Asset & Tooling
 •	Implement Asset Loader
-•	Support .png, .obj, .gltf
+•	Support .png, .obj, .gltf, .wav, .ogg
 •	Use stb_image, tinyobjloader, cgltf
 •	Build resource manager with caching
+•	Add audio manager for sound effects and background music
+•	Use OpenAL Soft as audio backend
 •	Add ImGui-based debug UI for runtime inspection
 
 ⸻
@@ -70,6 +74,7 @@ TIMEFRAME
 •	Implement basic 2D/3D animation system
 •	Skeletal animation for 3D characters
 •	Sprite animation for 2D
+•	Add gameplay-triggered sound effects and music transitions
 •	Integrate Bullet Physics or write your own collision/physics
 
 ⸻
