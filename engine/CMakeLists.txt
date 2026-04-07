@@ -15,6 +15,8 @@ add_library(engine
     graphics/opengl/OpenGLRenderer.cpp
     graphics/Texture.cpp
     graphics/SpriteSheet.cpp
+    ecs/RenderSystem.cpp
+    ecs/MovementSystem.cpp
 )
 
 target_include_directories(engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
