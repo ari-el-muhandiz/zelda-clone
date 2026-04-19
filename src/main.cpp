@@ -12,7 +12,7 @@
 #include "graphics/opengl/OpenGLGraphicsEngine.h"
 #include "graphics/opengl/OpenGLRenderer.h"
 #include "game/Game.h"
-#include "game/GameObject.h"
+#include "ecs/Components.h"
 
 int main(int argc, char *argv[])
 {
@@ -75,11 +75,10 @@ int main(int argc, char *argv[])
     InputManager inputManager;
     Engine::Game game(renderer.get(), window.get(), &inputManager);
 
-    // Create player GameObject
-    Engine::GameObject* player = game.createGameObject("Player");
-    player->setMesh(quadMesh.get());
-    player->setMaterial(material.get());
-
+    // Create player entity
+    auto player = game.createEntity("Player");
+    game.getRegistry().emplace<Engine::Sprite>(player, Engine::Sprite{quadMesh.get(), material.get()});
+    game.getRegistry().emplace<Engine::PlayerInput>(player);
     // Game loop
     Engine::Clock clock;
     while (game.isRunning())

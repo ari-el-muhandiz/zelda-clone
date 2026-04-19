@@ -4,7 +4,6 @@ add_library(engine
     core/Clock.cpp
     input/InputManager.cpp
     window/SDLWindow.cpp
-    game/GameObject.cpp
     game/Game.cpp
     graphics/Mesh.cpp
     graphics/Shader.cpp
@@ -26,5 +25,6 @@ target_link_libraries(engine
     glad::glad
     ${SDL2_LIBRARIES}
     OpenGL::GL
+    PUBLIC
     EnTT::EnTT
 )

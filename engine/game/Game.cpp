@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "../core/Config.h"
-#include <algorithm>
+#include "../ecs/Components.h"
+#include "../ecs/MovementSystem.h"
+#include "../ecs/RenderSystem.h"
 
 namespace Engine
 {
@@ -41,25 +43,6 @@ namespace Engine
         renderer->endFrame();
     }
 
-    GameObject* Game::createGameObject(const std::string& name)
-    {
-        auto gameObject = std::make_unique<GameObject>(name);
-        GameObject* ptr = gameObject.get();
-        gameObjects.push_back(std::move(gameObject));
-        return ptr;
-    }
-
-    void Game::removeGameObject(GameObject* object)
-    {
-        auto it = std::find_if(gameObjects.begin(), gameObjects.end(),
-                               [object](const std::unique_ptr<GameObject>& go) {
-                                   return go.get() == object;
-                               });
-        if (it != gameObjects.end())
-        {
-            gameObjects.erase(it);
-        }
-    }
 
     void Game::updateInput()
     {
@@ -74,31 +57,21 @@ namespace Engine
 
     void Game::updateGameObjects(float deltaTime)
     {
-        for (auto& gameObject : gameObjects)
-        {
-            if (!gameObject->isActive())
-            {
-                continue;
-            }
-
-            // Simple movement for player (demo)
-            // In a real game, this would come from a component system
-            Transform& transform = gameObject->getTransform();
-            float moveX = inputManager->getMoveX() * Config::Game::HERO_SPEED * deltaTime;
-            float moveY = inputManager->getMoveY() * Config::Game::HERO_SPEED * deltaTime;
-            transform.translate(moveX, moveY);
-        }
+        movementSystem(registry, inputManager, deltaTime);
     }
 
     void Game::renderGameObjects()
     {
-        for (auto& gameObject : gameObjects)
-        {
-            if (gameObject->isActive())
-            {
-                gameObject->render(renderer);
-            }
-        }
+        renderSystem(registry, renderer);
+    }
+
+    entt::entity Game::createEntity(const std::string& name)
+    {
+        entt::entity entity = registry.create();
+        registry.emplace<Name>(entity, Name{name});
+        registry.emplace<Transform>(entity);
+        registry.emplace<Active>(entity);
+        return entity;
     }
 
 } // namespace Engine

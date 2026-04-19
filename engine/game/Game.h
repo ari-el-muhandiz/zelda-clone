@@ -1,10 +1,9 @@
 #pragma once
 
-#include "GameObject.h"
+#include "../graphics/Renderer.h"
 #include "../input/InputManager.h"
 #include "../window/Window.h"
-#include <memory>
-#include <vector>
+#include <entt/entt.hpp>
 
 namespace Engine
 {
@@ -19,10 +18,6 @@ namespace Engine
         void update(float deltaTime);
         void render();
 
-        // GameObject management
-        GameObject* createGameObject(const std::string& name = "GameObject");
-        void removeGameObject(GameObject* object);
-
         // Accessors
         Renderer* getRenderer() const { return renderer; }
         Window* getWindow() const { return window; }
@@ -30,6 +25,9 @@ namespace Engine
 
         bool isRunning() const { return running; }
         void quit() { running = false; }
+
+        entt::registry& getRegistry() { return registry; }
+        entt::entity createEntity(const std::string& name);
 
     private:
         void updateInput();
@@ -39,8 +37,8 @@ namespace Engine
         Renderer* renderer;
         Window* window;
         InputManager* inputManager;
-        std::vector<std::unique_ptr<GameObject>> gameObjects;
         bool running = true;
+        entt::registry registry;
     };
 
 } // namespace Engine
