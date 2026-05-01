@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../GraphicsContext.h"
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 namespace Engine
 {

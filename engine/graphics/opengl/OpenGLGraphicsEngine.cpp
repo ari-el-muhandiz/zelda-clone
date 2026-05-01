@@ -27,11 +27,17 @@ namespace Engine
             // Enable VSync
             SDL_GL_SetSwapInterval(1);
 
+            // SDL3 returns SDL_FunctionPointer; GLAD expects void* return.
+            // Keep the cast isolated in one trampoline to avoid spreading unsafe casts.
+            static auto glGetProc = [](const char* name) -> void* {
+                return reinterpret_cast<void*>(SDL_GL_GetProcAddress(name));
+            };
+
             // Initialize GLAD
-            if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
+            if (!gladLoadGLLoader((GLADloadproc)+glGetProc))
             {
                 std::cerr << "Failed to initialize GLAD" << std::endl;
-                SDL_GL_DeleteContext(glContext);
+                SDL_GL_DestroyContext(glContext);
                 return nullptr;
             }
 

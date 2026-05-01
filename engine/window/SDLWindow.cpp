@@ -6,7 +6,7 @@ namespace Engine
 
     SDLWindow::SDLWindow(int width, int height, const char* title)
     {
-        if (SDL_Init(SDL_INIT_VIDEO) != 0)
+        if (SDL_Init(SDL_INIT_VIDEO) != true)
         {
             std::cerr << "SDL Init Failed: " << SDL_GetError() << std::endl;
             return;
@@ -20,11 +20,9 @@ namespace Engine
         // Create window
         window = SDL_CreateWindow(
             title,
-            SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED,
             width,
             height,
-            SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+            SDL_WINDOW_OPENGL);
 
         if (!window)
         {
@@ -33,6 +31,7 @@ namespace Engine
             return;
         }
 
+        SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
         // Note: GL context is created by the graphics engine (OpenGLGraphicsEngine)
     }
 
@@ -62,11 +61,11 @@ namespace Engine
         {
             switch (event.type)
             {
-                case SDL_QUIT:
+                case SDL_EVENT_QUIT:
                     shouldClose = true;
                     break;
-                case SDL_KEYDOWN:
-                    if (event.key.keysym.sym == SDLK_ESCAPE)
+                case SDL_EVENT_KEY_DOWN:
+                    if (event.key.key == SDLK_ESCAPE)
                     {
                         shouldClose = true;
                     }

@@ -15,7 +15,7 @@ namespace Engine
         {
             if (glContext)
             {
-                SDL_GL_DeleteContext(glContext);
+                SDL_GL_DestroyContext(glContext);
             }
         }
 

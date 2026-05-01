@@ -49,7 +49,7 @@ namespace Engine
         inputManager->update();
         window->update();
 
-        if (inputManager->isKeyDown(SDL_SCANCODE_ESCAPE))
+        if (inputManager->isKeyDown(Engine::Input::KeyCode::Escape))
         {
             running = false;
         }

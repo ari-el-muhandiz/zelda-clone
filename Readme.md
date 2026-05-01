@@ -1,4 +1,4 @@
-This is Zelda clone game built using SDL 2.0 and C++.
+This is Zelda clone game built using SDL3 and C++.
 
 ✅ Phase 1: Core Engine Prototype
 •	Set up build system with C++ and CMake
@@ -33,7 +33,7 @@ TIMEFRAME
 
 ✅ Week 1–4: Set Up Your Environment
 •	Install Rider for Unreal, CMake, and Vulkan SDK
-•	Choose your windowing/input library: GLFW or SDL2
+•	Choose your windowing/input library: GLFW or SDL3
 •	Set up your first C++ project structure using CMake
 •	Create a simple game loop that opens a window and polls for input
 •	Optional: Add hot-reload-friendly directory structure (e.g., src/, engine/, game/)
@@ -52,6 +52,7 @@ TIMEFRAME
 ✅ Week 9–14: Core Systems
 •	Implement Entity-Component-System (ECS)
 •	Use entt or write your own
+•	Use SDL3 as the runtime backend
 •	Add a Scene Graph for hierarchical transforms
 •	Build a Camera system (2D and 3D support)
 •	Input system abstraction (keyboard/mouse/gamepad)

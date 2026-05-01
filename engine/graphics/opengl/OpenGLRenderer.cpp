@@ -1,6 +1,6 @@
 #include "OpenGLRenderer.h"
 #include "OpenGLContext.h"
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 // OpenGL constants
 constexpr int GL_VERTEX_SHADER = 0x8B31;

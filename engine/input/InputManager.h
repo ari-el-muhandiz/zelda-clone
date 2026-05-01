@@ -3,16 +3,16 @@
 //
 
 #pragma once
-#include <SDL.h>
+#include "KeyCode.h"
 
 class InputManager {
 public:
     void update();
     [[nodiscard]] bool isQuit() const;
-    [[nodiscard]] bool isKeyDown(SDL_Scancode key) const;
+    [[nodiscard]] bool isKeyDown(Engine::Input::KeyCode key) const;
     [[nodiscard]] float getMoveX() const;
     [[nodiscard]] float getMoveY() const;
 private:
     bool quit = false;
-    const Uint8* keyboardState = nullptr;
+    const bool* keyboardState = nullptr;
 };
