@@ -13,7 +13,7 @@ namespace Engine
         }
 
         // Process player input and update positions
-        registry.view<Active, Transform, PlayerInput>().each([input, deltaTime](Transform& transform)
+        registry.view<Active, LocalTransform, PlayerInput>().each([input, deltaTime](LocalTransform& transform)
         {
             auto moveX = input->getMoveX() * Config::Game::HERO_SPEED * deltaTime;
             auto moveY = input->getMoveY() * Config::Game::HERO_SPEED * deltaTime;

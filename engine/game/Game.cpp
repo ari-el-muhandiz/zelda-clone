@@ -69,7 +69,8 @@ namespace Engine
     {
         entt::entity entity = registry.create();
         registry.emplace<Name>(entity, Name{name});
-        registry.emplace<Transform>(entity);
+        registry.emplace<LocalTransform>(entity);
+        registry.emplace<WorldTransform>(entity);
         registry.emplace<Active>(entity);
         return entity;
     }
