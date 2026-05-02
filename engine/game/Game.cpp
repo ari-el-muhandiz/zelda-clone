@@ -3,6 +3,7 @@
 #include "../ecs/Components.h"
 #include "../ecs/MovementSystem.h"
 #include "../ecs/RenderSystem.h"
+#include "ecs/HierarchySystem.h"
 
 namespace Engine
 {
@@ -57,6 +58,7 @@ namespace Engine
 
     void Game::updateGameObjects(float deltaTime)
     {
+        hierarchySystem(registry);
         movementSystem(registry, inputManager, deltaTime);
     }
 

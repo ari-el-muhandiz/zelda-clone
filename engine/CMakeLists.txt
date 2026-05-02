@@ -16,6 +16,7 @@ add_library(engine
     graphics/SpriteSheet.cpp
     ecs/RenderSystem.cpp
     ecs/MovementSystem.cpp
+    ecs/HierarchySystem.cpp
 )
 
 target_include_directories(engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
