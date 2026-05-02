@@ -58,8 +58,8 @@ namespace Engine
 
     void Game::updateGameObjects(float deltaTime)
     {
-        hierarchySystem(registry);
         movementSystem(registry, inputManager, deltaTime);
+        hierarchySystem(registry);
     }
 
     void Game::renderGameObjects()

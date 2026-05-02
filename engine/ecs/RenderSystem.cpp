@@ -6,7 +6,7 @@ namespace Engine
 {
     void renderSystem(entt::registry& registry, Renderer* renderer)
     {
-        registry.view<Active, LocalTransform, Sprite>().each([renderer](const LocalTransform& transform, const Sprite& sprite)
+        registry.view<Active, WorldTransform, Sprite>().each([renderer](const WorldTransform& transform, const Sprite& sprite)
         {
             if (!sprite.mesh || !sprite.material || !renderer)
             {
