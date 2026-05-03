@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <memory>
 #include "input/InputManager.h"
@@ -14,7 +13,7 @@
 #include "game/Game.h"
 #include "ecs/Components.h"
 
-int main(int argc, char *argv[])
+int main()
 {
     // Create window
     auto window = std::make_unique<Engine::SDLWindow>(
@@ -84,7 +83,8 @@ int main(int argc, char *argv[])
     game.attachChild(player, childSprite);
 
     auto &childLocal = game.getRegistry().get<Engine::LocalTransform>(childSprite);
-    childLocal.setPosition(0.3f, 0.0f); // coba 0.2f - 0.5f dulu
+    childLocal.setPosition(0.3f, 0.0f);
+
     // Game loop
     Engine::Clock clock;
     while (game.isRunning())
