@@ -21,8 +21,8 @@ namespace Engine
             transform.translate(moveX, moveY);
 
 
-            auto& [lt, wt] = registry.get<LocalTransform, WorldTransform>(entity);
-            wt.needsUpdate = true; // Mark world transform as needing update
+            WorldTransform& wt = registry.get<WorldTransform>(entity);
+            wt.needsUpdate = true;
         });
     
     }

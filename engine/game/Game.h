@@ -29,6 +29,9 @@ namespace Engine
         entt::registry& getRegistry() { return registry; }
         entt::entity createEntity(const std::string& name);
 
+        void attachChild(entt::entity parent, entt::entity child);
+        void detachChild(entt::entity child);
+
     private:
         void updateInput();
         void updateGameObjects(float deltaTime);

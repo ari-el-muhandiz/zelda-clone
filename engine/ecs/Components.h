@@ -2,6 +2,7 @@
 
 #include <entt/entity/fwd.hpp>
 #include <string>
+#include <vector>
 
 #include "graphics/Material.h"
 #include "graphics/Mesh.h"

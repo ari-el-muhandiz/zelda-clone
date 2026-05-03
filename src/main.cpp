@@ -77,8 +77,14 @@ int main(int argc, char *argv[])
 
     // Create player entity
     auto player = game.createEntity("Player");
+    auto childSprite = game.createEntity("ChildSprite");
     game.getRegistry().emplace<Engine::Sprite>(player, Engine::Sprite{quadMesh.get(), material.get()});
     game.getRegistry().emplace<Engine::PlayerInput>(player);
+    game.getRegistry().emplace<Engine::Sprite>(childSprite, Engine::Sprite{quadMesh.get(), material.get()});
+    game.attachChild(player, childSprite);
+
+    auto &childLocal = game.getRegistry().get<Engine::LocalTransform>(childSprite);
+    childLocal.setPosition(0.3f, 0.0f); // coba 0.2f - 0.5f dulu
     // Game loop
     Engine::Clock clock;
     while (game.isRunning())
