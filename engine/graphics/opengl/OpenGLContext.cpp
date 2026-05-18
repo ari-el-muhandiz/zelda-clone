@@ -112,6 +112,11 @@ namespace Engine
             glUniform2f(location, x, y);
         }
 
+        void OpenGLContext::setUniformMatrix4(int32_t location, int count, bool transpose, const float* value)
+        {
+            glUniformMatrix4fv(location, count, transpose, value);
+        }
+
         void OpenGLContext::uniform1f(int32_t location, float value)
         {
             glUniform1f(location, value);

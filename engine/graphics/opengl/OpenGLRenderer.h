@@ -28,10 +28,21 @@ namespace Engine
             // Frame operations
             void beginFrame() override;
             void endFrame() override;
+            void setViewProjection(const float* mat4x4ColMajor) override;
+            void resetViewProjection() override;
 
             // Texture management
             void uploadTexture(Texture *texture) override;
             void deleteTexture(Texture *texture) override;
+
+        private:
+            // Internal state for view-projection matrix
+            float storedViewProjection[16] = {
+                1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1
+            };
         };
 
     } // namespace OpenGL

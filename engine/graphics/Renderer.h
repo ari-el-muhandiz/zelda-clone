@@ -33,6 +33,9 @@ namespace Engine
         // Frame operations
         virtual void beginFrame() = 0;
         virtual void endFrame() = 0;
+        // column-major 4x4 matrix
+        virtual void setViewProjection(const float* mat4x4ColMajor) = 0;
+        virtual void resetViewProjection() = 0;
 
         // Texture management
         virtual void uploadTexture(Texture *texture) = 0;

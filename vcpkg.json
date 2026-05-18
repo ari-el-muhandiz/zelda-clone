@@ -5,6 +5,7 @@
     "sdl3",
     "glad",
     "stb",
-    "entt"
+    "entt",
+    "glm"
   ]
 }

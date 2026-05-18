@@ -5,11 +5,12 @@ uniform vec2 offset;
 uniform float scale;
 uniform vec2 uvOffset;
 uniform vec2 uvScale;
+uniform mat4 viewProjection;
 
 out vec2 TexCoord;
 
 void main()
 {
-    gl_Position = vec4((aPos * scale) + offset, 0.0, 1.0);
+    gl_Position = viewProjection * vec4((aPos * scale) + offset, 0.0, 1.0);
     TexCoord = uvOffset + (aTexCoord * uvScale);
 }

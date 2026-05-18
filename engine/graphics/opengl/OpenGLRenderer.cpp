@@ -168,6 +168,12 @@ namespace Engine
             // Use shader program
             context->useProgram(shader->getProgram());
 
+            // Set view-projection matrix
+            int32_t vpLocation = context->getUniformLocation(shader->getProgram(), "viewProjection");
+            if (vpLocation >= 0)            {
+                context->setUniformMatrix4(vpLocation, 1, false, storedViewProjection);
+            }
+
             // Set material uniforms
             for (const auto &[name, value] : material->getFloatUniforms())
             {
@@ -249,6 +255,22 @@ namespace Engine
         void OpenGLRenderer::endFrame()
         {
             context->swapBuffers();
+        }
+
+        void OpenGLRenderer::setViewProjection(const float* mat4x4ColMajor)
+        {
+            std::memcpy(storedViewProjection, mat4x4ColMajor, 16 * sizeof(float));
+        }
+
+        void OpenGLRenderer::resetViewProjection()
+        {
+            auto identity = std::array<float, 16>{
+                1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1
+            };
+            std::memcpy(storedViewProjection, identity.data(), 16 * sizeof(float));
         }
 
         void OpenGLRenderer::uploadTexture(Texture *texture)

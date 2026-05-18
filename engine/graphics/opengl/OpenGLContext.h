@@ -48,6 +48,7 @@ namespace Engine
             void uniform2f(int32_t location, float x, float y) override;
             void uniform1f(int32_t location, float value) override;
             void uniform1i(int32_t location, int value) override;
+            void setUniformMatrix4(int32_t location, int count, bool transpose, const float* value) override;
 
             // Rendering
             void clearColor(float r, float g, float b, float a) override;
