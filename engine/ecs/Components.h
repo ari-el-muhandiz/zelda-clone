@@ -1,6 +1,6 @@
 #pragma once
 
-#include <entt/entity/fwd.hpp>
+#include <entt/entity/entity.hpp>
 #include <string>
 #include <vector>
 
@@ -102,5 +102,33 @@ namespace Engine
 
     struct Children { 
         std::vector<entt::entity> entities; 
+    };
+
+    struct Camera2D { 
+        float x = 0.0f; 
+        float y = 0.0f; 
+        float rotation = 0.0f; 
+        float zoom = 1.0f; 
+        float viewportWidth = 2.0f; 
+        float viewportHeight = 2.0f; 
+    };
+
+    struct Camera3D { 
+        float x = 0.0f; 
+        float y = 0.0f; 
+        float z = 3.0f;
+        float yaw = -90.0f;
+        float pitch = 0.0f;
+        float fovDegrees = 60.0f;
+        float nearPlane = 0.01f;
+        float farPlane = 100.0f;
+        float aspectRatio = 16.0f / 9.0f;
+    };
+
+    struct ActiveCamera {};
+
+    struct FollowTarget { 
+         entt::entity target = entt::null;
+        float lerpSpeed = 5.0f;
     };
 }
